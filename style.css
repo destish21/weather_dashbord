@@ -13,32 +13,27 @@ body {
 }
 .container-fluid {
     justify-content: space-between;
+    align-items: center;
 }
-#topic {
+.col-lg-9 {
     background-color: cadetblue;
     border-radius: 5px;
     padding: 10px;
     margin-top: 10px;
 }
-/* .say {
-    margin: 10px;
-}
-.weather-col {
-    margin-left: 20px;
-}
-#today {
-    max-width: 500px;
-} */
+
 #forecastH4 {
-    background-color: rgb(194, 199, 195);
+    background-color: rgb(184, 228, 193);
     border-radius: 10px;
     padding: 20px;
     width: 50%;
 }
-/* #forcastHeader {
-    text-decoration: underline;
-    color: black;
-} */
+#forcastHeader {
+    background-color: rgb(184, 228, 193);
+    color: blue;
+    padding: 30px;
+    align-items: center;
+}
 p {
     font-weight: 800;
 }

@@ -56,10 +56,10 @@ function finalWeather() {
             var temperature = $('<p>').addClass('card-text current-temp').text('Temperature: ' + temp + " °F");
             var humidity1 = $('<p>').addClass('card-text current-humidity').text('Humidity: ' + humidity + '%');
             var wind1 = $('<p>').addClass('card-text current-wind').text('wind Speed: ' + wind + 'MPH')
-            var pressure1 = $('<p1>').addClass('card-text current-pressure').text('Pressure: ' + pressure + 'Pa');
-            // var image = $('<img>').attr('src', 'https://openweathermap.org/img/w/' + icon + '.png');
+            var pressure1 = $('<p1>').addClass('card-text current-pressure').text('Pressure: ' + pressure + ' Pa');
+            var image = $('<img>').attr('src', 'https://openweathermap.org/img/w/' + icon + '.png');
             //adding to  page
-            // city.append(date)
+            city.append(image)
             cardBody.append(cityDate, city, temperature, humidity1, wind1, pressure1);
             card.append(cardBody);
             $('#currentCity').append(card)
@@ -72,7 +72,7 @@ function finalWeather() {
             }
 
         })
-        queryURL2 = queryForcastURl + city + weatherUnit + apiKey 
+        queryURL2 = queryForcastURl + city + weatherUnit + apiKey
 
         $.ajax({
             url: queryURL2,
@@ -82,26 +82,26 @@ function finalWeather() {
             console.log(data)
             var results = data.list;
             // console.log(results[0])
-            // var myForecast = [];
             console.log(new Date(data.list[0].dt_txt).toLocaleDateString())
             console.log(data.list[0].weather[0].icon)
 
             $("#forecast").html("<h3 id=\"forcastHeader\" class=\"mt-3\">5-Days Weather Forecasting:</h4>").append("<div class=\"row\">");
-            // loop over all forecasts (by 3-hour increments)
+            //  forecasts (by 3-hour increments) loop
             for (var i = 0; i < data.list.length; i++) {
                 if (data.list[i].dt_txt.indexOf("15:00:00") !== -1) {
-                    // create div for weather forcast
+                    // create div for 5-Days weather forcasting
                     var col = $("<div>").addClass("xyz col-md-3");
                     var card = $("<div>").addClass("card bg-primary text-white");
                     var body = $("<div>").addClass("card-body p-3");
-                    //create tags todays date, image, temp and humidity
+                    //create tags todays date, temp and humidity
                     var title = $("<h2>").addClass("card-title").text(new Date(data.list[i].dt_txt).toLocaleDateString());
-                    // var img = $("<img>").attr("src", imgURL + data.list[i].weather[i].icon + ".png");
+                    // var image = $("<img>").attr("src", imgURL + data.list[i].weather[i].icon + ".png");
                     var p1 = $("<p>").addClass("card-text").text("Temp: " + data.list[i].main.temp_max + " °F");
                     var p2 = $("<p>").addClass("card-text").text("Humidity: " + data.list[i].main.humidity + "%");
+                    // var p2 = $("<p>").addClass("card-text").text("Wind Speed: " + data.list[i].main.wind + 'MPH')
                     var p3 = $("<p>").addClass("card-text").text("Pressure: " + data.list[i].main.pressure + " Pa ");
-                    //apend the tags to the title, img, p1 & p2 to body, boy to card, card to col and finally col to the forcast div
-                    $("#forecast .row").append(col.append(card.append(body.append(title, p1, p2, p3))));
+                    //apend the tags to the title, p1, p2,p3 to body, boy to card, card to col and finally col to the 5 days weeatherforecasting div
+                    $("#forecast .row").append(col.append(card.append(body.append(title, p1, p2, p3,))));
                 }
             }
 
@@ -115,7 +115,7 @@ function finalWeather() {
             })
                 .then(function (data) {
                     //console.log(data.value);
-                    //create pagragragh for the uv index text and span tag for the data value number and append it to today's forcast only
+                    //create pagragragh for the uv index text and span tag for the data value number and append it to today's dayly only
                     var uvText = $("<p>").text("UV Index: ");
                     var mySpan = $("<span>").addClass("btn btn-sm").text(data.value);
                     // change color depending on uv value
