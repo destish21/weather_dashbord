@@ -86,7 +86,7 @@ function finalWeather() {
             console.log(new Date(data.list[0].dt_txt).toLocaleDateString())
             console.log(data.list[0].weather[0].icon)
 
-            $("#forecast").html("<h3 id=\"forcastHeader\" class=\"mt-3\">5-Day Forecast:</h4>").append("<div class=\"row\">");
+            $("#forecast").html("<h3 id=\"forcastHeader\" class=\"mt-3\">5-Days Weather Forecasting:</h4>").append("<div class=\"row\">");
             // loop over all forecasts (by 3-hour increments)
             for (var i = 0; i < data.list.length; i++) {
                 if (data.list[i].dt_txt.indexOf("15:00:00") !== -1) {
