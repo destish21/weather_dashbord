@@ -67,7 +67,7 @@ function finalWeather() {
 
             if (list.indexOf(city) === -1) {
                 list.push(nation);
-                window.localStorage.setItem("List", JSON.stringify(list));
+                window.localStorage.setItem("list", JSON.stringify(list));
                 makeRow(nation);
             }
 
@@ -144,7 +144,7 @@ if (list.length > 0) {
 
 $('#clear').on('click', function () {
     if (localStorage.length !== 0) {
-        var clear = prompt('Do you wont to clear list!');
+        var clear = confirm('press ok if you want to clear list!');
         if (clear) {
             $('list').empty();
             localStorage.clear();
