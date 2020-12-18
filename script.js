@@ -55,7 +55,7 @@ function finalWeather() {
             var cityDate = $('<h4>').addClass('card-title').text(date.toLocaleDateString('en-US'));
             var temperature = $('<p>').addClass('card-text current-temp').text('Temperature: ' + temp + " °F");
             var humidity1 = $('<p>').addClass('card-text current-humidity').text('Humidity: ' + humidity + '%');
-            var wind1 = $('<p>').addClass('card-text current-wind').text('wind Speed: ' + wind + 'MPH')
+            var wind1 = $('<p>').addClass('card-text current-wind').text('wind Speed: ' + wind + ' MPH ')
             var pressure1 = $('<p1>').addClass('card-text current-pressure').text('Pressure: ' + pressure + ' Pa');
             var image = $('<img>').attr('src', 'https://openweathermap.org/img/w/' + icon + '.png');
             //adding to  page
@@ -64,13 +64,6 @@ function finalWeather() {
             card.append(cardBody);
             $('#currentCity').append(card)
             UVIndex(lat, lon);
-
-            if (list.indexOf(city) === -1) {
-                list.push(nation);
-                window.localStorage.setItem("list", JSON.stringify(list));
-                makeRow(nation);
-            }
-
         })
         queryURL2 = queryForcastURl + city + weatherUnit + apiKey
 
@@ -95,17 +88,17 @@ function finalWeather() {
                     var body = $("<div>").addClass("card-body p-3");
                     //create tags todays date, temp and humidity
                     var title = $("<h2>").addClass("card-title").text(new Date(data.list[i].dt_txt).toLocaleDateString());
-                    // var image = $("<img>").attr("src", imgURL + data.list[i].weather[i].icon + ".png");
-                    var p1 = $("<p>").addClass("card-text").text("Temp: " + data.list[i].main.temp_max + " °F");
-                    var p2 = $("<p>").addClass("card-text").text("Humidity: " + data.list[i].main.humidity + "%");
-                    // var p2 = $("<p>").addClass("card-text").text("Wind Speed: " + data.list[i].main.wind + 'MPH')
-                    var p3 = $("<p>").addClass("card-text").text("Pressure: " + data.list[i].main.pressure + " Pa ");
+                    // var image = $("<img>").attr("src", "imgURL" + data.list[0].weather[0].icon + " .png");
+                    var p1 = $("<p>").addClass("card-text").text("Temperature: " + data.list[i].main.temp_max + " ° F");
+                    var p2 = $("<p>").addClass("card-text").text("Humidity: " + data.list[i].main.humidity + " %");
+                    var p3 = $("<p>").addClass("card-text").text("Wind Speed: " + data.list[i].wind.speed + ' MPH')
+                    var p4 = $("<p>").addClass("card-text").text("Pressure: " + data.list[i].main.pressure + "  Pa ");
+                    // var p3 = $("<p>").addClass("card-text").text("UVIndex: ") + data.city.coord.lat
                     //apend the tags to the title, p1, p2,p3 to body, boy to card, card to col and finally col to the 5 days weeatherforecasting div
-                    $("#forecast .row").append(col.append(card.append(body.append(title, p1, p2, p3,))));
+                    $("#forecast .row").append(col.append(card.append(body.append(title, p1, p2, p3, p4,))));
                 }
             }
-
-        })
+        });
 
         function UVIndex(lat, lon) {
             var queryURL = UviqueryURL + apiKey + "&lat=" + lat + "&lon=" + lon;
@@ -127,6 +120,7 @@ function finalWeather() {
                         mySpan.addClass("btn-danger");
                     }
                     $("#currentCity .card-body").append(uvText.append(mySpan));
+
                 });
         }
     }
