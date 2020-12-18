@@ -9,7 +9,7 @@ At dayly weather forecasting we can find iamge,date, name of the City, Country,T
 
 ![weather_dashbord](Screenshot6.png)
 
-![weather_dashbord](Screeenshot7.png)
+![weather_dashbord](Screenshot7.png)
 
 
 URL:  https://destish21.github.io/weather_dashbord/
