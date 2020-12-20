@@ -2,12 +2,12 @@ $('#document').ready(function () {
     finalWeather()
 })
 function finalWeather() {
-
     var date = new Date();
     $('#searchBtn').on('click', function (e) {
         e.preventDefault()
         var city = $('#myCity').val();
-        console.log(city)
+        $('#myCity').val('');
+        // console.log(city)
         getweather(city);
     });
 
@@ -27,7 +27,7 @@ function finalWeather() {
         var queryForcastURl = 'https://api.openweathermap.org/data/2.5/forecast?q=';
         var UviqueryURL = 'http://api.openweathermap.org/data/2.5/uvi?';
         var weatherUnit = "&units=imperial"
-        // var imgURL = 'https://openweathermap.org/img/w/';
+        var imgURL = 'https://openweathermap.org/img/w/';
         queryURL = queryweatherURL + city + weatherUnit + apiKey
         $.ajax({
             url: queryURL,
@@ -45,8 +45,10 @@ function finalWeather() {
             var lat = (response.coord.lat)
             var lon = (response.coord.lon)
             var icon = response.weather[0].icon
+            // var sunrise = response.sys.sunrise
+            // var sunset = response.sys.sunset
+            // console.log(sunrise, sunset)
             makeRow(nation);
-
             $('#currentCity').empty();
 
             var card = $('<div>').addClass('card');
@@ -65,8 +67,8 @@ function finalWeather() {
             $('#currentCity').append(card)
             UVIndex(lat, lon);
         })
-        queryURL2 = queryForcastURl + city + weatherUnit + apiKey
 
+        queryURL2 = queryForcastURl + city + weatherUnit + apiKey
         $.ajax({
             url: queryURL2,
             method: 'GET',
@@ -88,17 +90,27 @@ function finalWeather() {
                     var body = $("<div>").addClass("card-body p-3");
                     //create tags todays date, temp and humidity
                     var title = $("<h2>").addClass("card-title").text(new Date(data.list[i].dt_txt).toLocaleDateString());
-                    // var image = $("<img>").attr("src", "imgURL" + data.list[0].weather[0].icon + " .png");
-                    var p1 = $("<p>").addClass("card-text").text("Temperature: " + data.list[i].main.temp_max + " ° F");
+                    var icon = $('<img>').attr('src', imgURL + data.list[i].weather[0].icon + '.png');
+                    var p1 = $("<p>").addClass("card-text").text("Temperature: " + data.list[i].main.temp_max + " °F");
                     var p2 = $("<p>").addClass("card-text").text("Humidity: " + data.list[i].main.humidity + " %");
                     var p3 = $("<p>").addClass("card-text").text("Wind Speed: " + data.list[i].wind.speed + ' MPH')
                     var p4 = $("<p>").addClass("card-text").text("Pressure: " + data.list[i].main.pressure + "  Pa ");
-                    // var p3 = $("<p>").addClass("card-text").text("UVIndex: ") + data.city.coord.lat
+                    var xy = $("<p>").addClass("card-text").text("UV Index: " + data.city.coord.lat + " mW/cm2 ");
                     //apend the tags to the title, p1, p2,p3 to body, boy to card, card to col and finally col to the 5 days weeatherforecasting div
-                    $("#forecast .row").append(col.append(card.append(body.append(title, p1, p2, p3, p4,))));
+                    $("#forecast .row").append(col.append(card.append(body.append(title, icon, p1, p2, p3, p4, xy))));
                 }
             }
         });
+
+        var list = window.localStorage.setItem('city', JSON.stringify(city))
+        for (var i = 0; i < city.length; i++) {
+            makeRow(nation[i]);
+        }
+
+        var list = JSON.parse(window.localStorage.getItem("city")) || [];
+        if (data.city.length > 0) {
+            getweather(city[city.length - 1]);
+        }
 
         function UVIndex(lat, lon) {
             var queryURL = UviqueryURL + apiKey + "&lat=" + lat + "&lon=" + lon;
@@ -124,16 +136,6 @@ function finalWeather() {
                 });
         }
     }
-}
-
-var list = window.localStorage.setItem('list', JSON.stringify(list))
-for (var i = 0; i < list.length; i++) {
-    makeRow(list[i]);
-}
-
-var list = JSON.parse(window.localStorage.getItem("list")) || [];
-if (list.length > 0) {
-    getweather(list[list.length - 1]);
 }
 
 $('#clear').on('click', function () {
