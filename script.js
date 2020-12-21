@@ -45,9 +45,6 @@ function finalWeather() {
             var lat = (response.coord.lat)
             var lon = (response.coord.lon)
             var icon = response.weather[0].icon
-            // var sunrise = response.sys.sunrise
-            // var sunset = response.sys.sunset
-            // console.log(sunrise, sunset)
             makeRow(nation);
             $('#currentCity').empty();
 
@@ -58,7 +55,7 @@ function finalWeather() {
             var temperature = $('<p>').addClass('card-text current-temp').text('Temperature: ' + temp + " °F");
             var humidity1 = $('<p>').addClass('card-text current-humidity').text('Humidity: ' + humidity + '%');
             var wind1 = $('<p>').addClass('card-text current-wind').text('wind Speed: ' + wind + ' MPH ')
-            var pressure1 = $('<p1>').addClass('card-text current-pressure').text('Pressure: ' + pressure + ' Pa');
+            var pressure1 = $('<p>').addClass('card-text current-pressure').text('Pressure: ' + pressure + ' Pa');
             var image = $('<img>').attr('src', 'https://openweathermap.org/img/w/' + icon + '.png');
             //adding to  page
             city.append(image)
@@ -95,10 +92,10 @@ function finalWeather() {
                     var p2 = $("<p>").addClass("card-text").text("Humidity: " + data.list[i].main.humidity + " %");
                     var p3 = $("<p>").addClass("card-text").text("Wind Speed: " + data.list[i].wind.speed + ' MPH')
                     var p4 = $("<p>").addClass("card-text").text("Pressure: " + data.list[i].main.pressure + "  Pa ");
-                    var xy = $("<p>").addClass("card-text").text("UV Index: " + data.city.coord.lat + " mW/cm2 ");
+                    // var xy = $("<p>").addClass("card-text").text("UV Index: " + data.city.coord.lat + " mW/cm2 ");
                     // var wz = $("<p>").addClass("card-text").text("UV Index: " + data.city.coord.lon + " mW/cm2 ");
                     //apend the tags to the title,image, p1, p2,p3,p4 and xy to body, body to card, card to col and finally col to the 5 days weeatherforecasting div
-                    $("#forecast .row").append(col.append(card.append(body.append(title, icon, p1, p2, p3, p4, xy))));
+                    $("#forecast .row").append(col.append(card.append(body.append(title, icon, p1, p2, p3, p4))));
                 }
             }
         });
