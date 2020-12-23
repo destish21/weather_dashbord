@@ -85,6 +85,8 @@ function finalWeather() {
                     var col = $("<div>").addClass("xyz col-md-3");
                     var card = $("<div>").addClass("card bg-primary text-white");
                     var body = $("<div>").addClass("card-body p-3");
+                    var uvText = $("<div>").addClass("UV Index: ");
+
                     //create tags todays date, image, temp and humidity,windSpeed,Pressure.
                     var title = $("<h2>").addClass("card-title").text(new Date(data.list[i].dt_txt).toLocaleDateString());
                     var icon = $('<img>').attr('src', imgURL + data.list[i].weather[0].icon + '.png');
@@ -97,12 +99,13 @@ function finalWeather() {
                 }
             }
         });
+
         window.localStorage.setItem('city', JSON.stringify(city));
         for (var i = 0; i < city.length; i++) {
             if(city.length === -1){
                 getweather(city);
             }
-            // makeRow(nation[i]);
+           // makeRow(nation[i]);
         }
 
         var list = JSON.parse(window.localStorage.getItem("city")) || [];
