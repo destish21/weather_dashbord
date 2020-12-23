@@ -92,22 +92,22 @@ function finalWeather() {
                     var p2 = $("<p>").addClass("card-text").text("Humidity: " + data.list[i].main.humidity + " %");
                     var p3 = $("<p>").addClass("card-text").text("Wind Speed: " + data.list[i].wind.speed + ' MPH')
                     var p4 = $("<p>").addClass("card-text").text("Pressure: " + data.list[i].main.pressure + "  Pa ");
-                    // var xy = $("<p>").addClass("card-text").text("UV Index: " + data.city.coord.lat + " mW/cm2 ");
-                    // var wz = $("<p>").addClass("card-text").text("UV Index: " + data.city.coord.lon + " mW/cm2 ");
                     //apend the tags to the title,image, p1, p2,p3,p4 and xy to body, body to card, card to col and finally col to the 5 days weeatherforecasting div
                     $("#forecast .row").append(col.append(card.append(body.append(title, icon, p1, p2, p3, p4))));
                 }
             }
         });
-
-        var list = window.localStorage.setItem('city', JSON.stringify(city))
+        window.localStorage.setItem('city', JSON.stringify(city));
         for (var i = 0; i < city.length; i++) {
-            makeRow(nation[i]);
+            if(city.length === -1){
+                getweather(city);
+            }
+            // makeRow(nation[i]);
         }
 
         var list = JSON.parse(window.localStorage.getItem("city")) || [];
-        if (data.city.length > 0) {
-            getweather(city[city.length - 1]);
+        if (city.length > 0) {
+            getweather(city(city.length - 1));
         }
 
         function UVIndex(lat, lon) {
@@ -116,21 +116,20 @@ function finalWeather() {
                 url: queryURL,
                 method: "GET",
             }).then(function (data) {
-                    //console.log(data.value);
-                    //create pagragragh for the uv index text and span tag for the data value number and append it to today's dayly only
-                    var uvText = $("<p>").text("UV Index: ");
-                    var mySpan = $("<span>").addClass("btn btn-sm").text(data.value);
-                    // change color depending on uv value
-                    if (data.value < 3) {
-                        mySpan.addClass("btn-success");
-                    } else if (data.value < 7) {
-                        mySpan.addClass("btn-warning");
-                    } else {
-                        mySpan.addClass("btn-danger");
-                    }
-                    $("#currentCity .card-body").append(uvText.append(mySpan));
-
-                });
+                //console.log(data.value);
+                //create pagragragh for the uv index text and span tag for the data value number and append it to today's dayly only
+                var uvText = $("<p>").text("UV Index: ");
+                var mySpan = $("<span>").addClass("btn btn-sm").text(data.value);
+                // change color depending on uv value
+                if (data.value < 3) {
+                    mySpan.addClass("btn-success");
+                } else if (data.value < 7) {
+                    mySpan.addClass("btn-warning");
+                } else {
+                    mySpan.addClass("btn-danger");
+                }
+                $("#currentCity .card-body").append(uvText.append(mySpan));
+            });
         }
     }
 }
