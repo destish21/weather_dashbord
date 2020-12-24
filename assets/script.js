@@ -110,7 +110,7 @@ function finalWeather() {
 
         var list = JSON.parse(window.localStorage.getItem("city")) || [];
         if (city.length > 0) {
-            getweather(city(city.length - 1));
+            getweather(city);
         }
 
         function UVIndex(lat, lon) {
