@@ -76,7 +76,6 @@ function finalWeather() {
             // console.log(results[0])
             console.log(new Date(data.list[0].dt_txt).toLocaleDateString())
             console.log(data.list[0].weather[0].icon)
-
             $("#forecast").html("<h3 id=\"forcastHeader\" class=\"mt-3\">5-Days Weather Forecasting:</h4>").append("<div class=\"row\">");
             //  forecasts (by 3-hour increments) loop
             for (var i = 0; i < data.list.length; i++) {
@@ -85,7 +84,7 @@ function finalWeather() {
                     var col = $("<div>").addClass("xyz col-md-3");
                     var card = $("<div>").addClass("card bg-primary text-white");
                     var body = $("<div>").addClass("card-body p-3");
-                    var uvText = $("<div>").addClass("UV Index: ");
+                    // var uvText = $("<div>").addClass("UV Index: ");
 
                     //create tags todays date, image, temp and humidity,windSpeed,Pressure.
                     var title = $("<h2>").addClass("card-title").text(new Date(data.list[i].dt_txt).toLocaleDateString());
@@ -94,21 +93,21 @@ function finalWeather() {
                     var p2 = $("<p>").addClass("card-text").text("Humidity: " + data.list[i].main.humidity + " %");
                     var p3 = $("<p>").addClass("card-text").text("Wind Speed: " + data.list[i].wind.speed + ' MPH')
                     var p4 = $("<p>").addClass("card-text").text("Pressure: " + data.list[i].main.pressure + "  Pa ");
+                    // var p5 = $("<p>").addClass("card-text").text("uvText: " + data.list[i].coord.uvText);
                     //apend the tags to the title,image, p1, p2,p3,p4 and xy to body, body to card, card to col and finally col to the 5 days weeatherforecasting div
-                    $("#forecast .row").append(col.append(card.append(body.append(title, icon, p1, p2, p3, p4))));
+                    $("#forecast .row").append(col.append(card.append(body.append(title, icon, p1, p2, p3, p4,))));
                 }
             }
         });
-
-        window.localStorage.setItem('city', JSON.stringify(city));
+        var city = window.localStorage.setItem('city', JSON.stringify(city));
         for (var i = 0; i < city.length; i++) {
-            if(city.length === -1){
-                getweather(city);
+            if (city.length === -1) {
+                makeRow(nation);
+                // getweather(city);
             }
-           // makeRow(nation[i]);
         }
 
-        var list = JSON.parse(window.localStorage.getItem("city")) || [];
+        var city = JSON.parse(window.localStorage.getItem("city")) || [];
         if (city.length > 0) {
             getweather(city);
         }
