@@ -84,7 +84,6 @@ function finalWeather() {
                     var col = $("<div>").addClass("xyz col-md-3");
                     var card = $("<div>").addClass("card bg-primary text-white");
                     var body = $("<div>").addClass("card-body p-3");
-                    // var uvText = $("<div>").addClass("UV Index: ");
 
                     //create tags todays date, image, temp and humidity,windSpeed,Pressure.
                     var title = $("<h2>").addClass("card-title").text(new Date(data.list[i].dt_txt).toLocaleDateString());
@@ -93,8 +92,8 @@ function finalWeather() {
                     var p2 = $("<p>").addClass("card-text").text("Humidity: " + data.list[i].main.humidity + " %");
                     var p3 = $("<p>").addClass("card-text").text("Wind Speed: " + data.list[i].wind.speed + ' MPH')
                     var p4 = $("<p>").addClass("card-text").text("Pressure: " + data.list[i].main.pressure + "  Pa ");
-                    // var p5 = $("<p>").addClass("card-text").text("uvText: " + data.list[i].coord.uvText);
-                    //apend the tags to the title,image, p1, p2,p3,p4 and xy to body, body to card, card to col and finally col to the 5 days weeatherforecasting div
+                    
+                    //apend the tags to the title,image, p1, p2,p3,p4, to body, body to card, card to col and finally col to the 5 days weeatherforecasting div
                     $("#forecast .row").append(col.append(card.append(body.append(title, icon, p1, p2, p3, p4,))));
                 }
             }
@@ -103,7 +102,6 @@ function finalWeather() {
         for (var i = 0; i < city.length; i++) {
             if (city.length === -1) {
                 makeRow(nation);
-                // getweather(city);
             }
         }
 
