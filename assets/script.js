@@ -92,14 +92,14 @@ function finalWeather() {
                     var p2 = $("<p>").addClass("card-text").text("Humidity: " + data.list[i].main.humidity + " %");
                     var p3 = $("<p>").addClass("card-text").text("Wind Speed: " + data.list[i].wind.speed + ' MPH')
                     var p4 = $("<p>").addClass("card-text").text("Pressure: " + data.list[i].main.pressure + "  Pa ");
-                    
+
                     //apend the tags to the title,image, p1, p2,p3,p4, to body, body to card, card to col and finally col to the 5 days weeatherforecasting div
                     $("#forecast .row").append(col.append(card.append(body.append(title, icon, p1, p2, p3, p4,))));
                 }
             }
         });
         var city = window.localStorage.setItem('city', JSON.stringify(city));
-        for (var i = 0; i < city.length; i++) {
+        for (var i = 0; i < data.length; i++) {
             if (city.length === -1) {
                 makeRow(nation);
             }
