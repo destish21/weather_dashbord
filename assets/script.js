@@ -82,7 +82,7 @@ function finalWeather() {
                 if (data.list[i].dt_txt.indexOf("15:00:00") !== -1) {
                     // create div for 5-Days weather forcasting
                     var col = $("<div>").addClass("xyz col-md-3");
-                    var card = $("<div>").addClass("card bg-primary text-white");
+                    var card = $("<div>").addClass("card bg-primary text-white"); 
                     var body = $("<div>").addClass("card-body p-3");
 
                     //create tags todays date, image, temp and humidity,windSpeed,Pressure.
