@@ -98,18 +98,24 @@ function finalWeather() {
                 }
             }
         });
-        var city = window.localStorage.setItem('city', JSON.stringify(city));
-        for (var i = 0; i < data.length; i++) {
+       
+        window.localStorage.setItem('city', JSON.stringify(city));
+        for (var i = 0; i < city; i++) {
             if (city.length === -1) {
-                makeRow(nation);
+                // makeRow(nation);
+                var city = getweather(city);
+                list.push(city[i]);
             }
         }
+        console.log(city)
 
-        var city = JSON.parse(window.localStorage.getItem("city")) || [];
-        if (city.length > 0) {
+        JSON.parse(window.localStorage.getItem('city') ||[]);
+        if (city > 0) {
             getweather(city);
+            // makeRow(nation);
+            $('body').append(city);
         }
-
+        // console.log(window.localStorage.getItem('city') ||[])
         function UVIndex(lat, lon) {
             var queryURL = UviqueryURL + apiKey + "&lat=" + lat + "&lon=" + lon;
             $.ajax({
