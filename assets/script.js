@@ -25,7 +25,7 @@ function finalWeather() {
         var apiKey = '&appid=ed0adc15d17ec7dd70dba3b837bf6bd6';
         var queryweatherURL = 'https://api.openweathermap.org/data/2.5/weather?q=';
         var queryForcastURl = 'https://api.openweathermap.org/data/2.5/forecast?q=';
-        var UviqueryURL = 'http://api.openweathermap.org/data/2.5/uvi?';
+        var UviqueryURL = 'https://api.openweathermap.org/data/2.5/uvi?';
         var weatherUnit = "&units=imperial"
         var imgURL = 'https://openweathermap.org/img/w/';
         queryURL = queryweatherURL + city + weatherUnit + apiKey
