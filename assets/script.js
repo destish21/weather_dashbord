@@ -13,26 +13,16 @@ function getweather(city) {
     }).then(function (response) {
         console.log(response);
         var date = (response.dt)
-        // console.log(date)
         var temp = (response.main.temp);
-        // console.log(temp)
         var cityName = (response.name)
-        // console.log(cityName)
         var countryName = (response.sys.country);
-        // console.log(countryName)
         var nation = cityName + ', ' + countryName;
         var humidity = (response.main.humidity);
-        // console.log(humidity)
         var pressure = (response.main.pressure);
-        // console.log(pressure)
         var wind = (response.wind.speed);
-        // console.log(wind)
         var lat = (response.coord.lat);
-        // console.log(lat)
         var lon = (response.coord.lon)
-        // console.log(lon)
         var icon = (response.weather[0].icon);
-        // console.log(icon)
         makelist(nation);
         $('#currentCity').empty();
         console.log(nation)
@@ -41,7 +31,7 @@ function getweather(city) {
         var cardBody = $('<div>').addClass('card-body');
         var city = $('<h2>').addClass('card-title').text(nation);
         // var cityDate = $('<h4>').addClass('card-title').text(date.toLocaleDateString());
-        var cityDate = $('<h4>').addClass('card-title').text (new Date((date)));
+        var cityDate = $('<h4>').addClass('card-title').text(new Date((date)));
 
         var temperature = $('<p>').addClass('card-text current-temp').text('Temperature: ' + temp + " °F");
         var humidity1 = $('<p>').addClass('card-text current-humidity').text('Humidity: ' + humidity + '%');
@@ -54,20 +44,13 @@ function getweather(city) {
         card.append(cardBody);
         $('#currentCity').append(card)
         UVIndex(lat, lon);
-
-        // makelist(nation);
-        // if (list.indexOf(city) === -1) {
-        //     list.push(nation);
-        //     window.localStorage.setItem("city", JSON.stringify(list));
-        //     // makelist(nation);
-        // }
     });
 
     queryURL2 = queryForcastURl + city + weatherUnit + apiKey
     $.ajax({
         url: queryURL2,
         method: 'GET',
-    
+
     }).then(function (data) {
         console.log(data)
         var results = data.list;
@@ -95,17 +78,8 @@ function getweather(city) {
         }
     });
 
-    // for (var i = 0; i < city; i++) {
-    //     if (city.length === -1) {
-    // makeRow(nation);
-    // var city = getweather(city);
     list.push(city);
-    // console.log(list , 'x')
     window.localStorage.setItem('city', JSON.stringify(list));
-
-    //     }
-    // }
-    // console.log(city)
 
     function UVIndex(lat, lon) {
         var queryURL = UviqueryURL + apiKey + "&lat=" + lat + "&lon=" + lon;
@@ -154,7 +128,6 @@ function makelist(name) {
     $(".list").prepend(li);
 }
 
-
 // var list = JSON.parse(window.localStorage.getItem('city') || []);
 var list = JSON.parse(window.localStorage.getItem('city')) || [];
 // console.log(list)
@@ -163,8 +136,6 @@ for (var i = 0; i < list.length; i++) {
         // console.log("doing the thing on list 0")
         getweather(list[i]);
     }
-    //getweather(list[0])
-    // makelist(list[i])
 }
 
 $('#clear').on('click', function () {
@@ -172,7 +143,7 @@ $('#clear').on('click', function () {
         var clear = confirm('press ok if you want to clear list!');
         if (clear) {
             $('list').empty();
-            localStorage.setItem('city',[]);
+            localStorage.setItem('city', []);
         }
     }
 });
