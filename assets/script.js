@@ -107,22 +107,6 @@ function getweather(city) {
     // }
     // console.log(city)
 
-
-    // var list = JSON.parse(window.localStorage.getItem("city")) || [];
-    // if (city.length > 0) {
-    //     getweather(list[list.length - 1]);
-    // }
-    // for (var i = 0; i <city.length; i++) {
-    //     makelist(list[i]);
-    // }
-
-    // if (city > 0) {
-    //     getweather(city);
-    //     // makeRow(nation);
-    //     $('body').append(city);
-    // }
-    // console.log(window.localStorage.getItem('city') ||[])
-
     function UVIndex(lat, lon) {
         var queryURL = UviqueryURL + apiKey + "&lat=" + lat + "&lon=" + lon;
         $.ajax({
