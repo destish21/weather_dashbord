@@ -11,7 +11,7 @@ function getweather(city) {
         method: 'GET',
 
     }).then(function (response) {
-        console.log("getWeather response",response);
+        console.log(response);
         var date = (response.dt)
         // console.log(date)
         var temp = (response.main.temp);
@@ -100,7 +100,7 @@ function getweather(city) {
     // makeRow(nation);
     // var city = getweather(city);
     list.push(city);
-    console.log(list , 'x')
+    // console.log(list , 'x')
     window.localStorage.setItem('city', JSON.stringify(list));
 
     //     }
@@ -171,11 +171,12 @@ function makelist(name) {
 }
 
 
-var list = JSON.parse(window.localStorage.getItem('city') || []);
-console.log("y",list)
+// var list = JSON.parse(window.localStorage.getItem('city') || []);
+var list = JSON.parse(window.localStorage.getItem('city')) || [];
+// console.log(list)
 for (var i = 0; i < list.length; i++) {
     if (i === 0) {
-        console.log("doing the thing on list 0")
+        // console.log("doing the thing on list 0")
         getweather(list[i]);
     }
     //getweather(list[0])
@@ -187,7 +188,7 @@ $('#clear').on('click', function () {
         var clear = confirm('press ok if you want to clear list!');
         if (clear) {
             $('list').empty();
-            localStorage.clear();
+            localStorage.setItem('city',[]);
         }
     }
 });
