@@ -26,13 +26,12 @@ function getweather(city) {
         makelist(nation);
         $('#currentCity').empty();
         console.log(nation)
+        var date = new Date();
 
         var card = $('<div>').addClass('card');
         var cardBody = $('<div>').addClass('card-body');
         var city = $('<h2>').addClass('card-title').text(nation);
-        // var cityDate = $('<h4>').addClass('card-title').text(date.toLocaleDateString());
-        var cityDate = $('<h4>').addClass('card-title').text(new Date(date));
-
+        var cityDate = $('<h4>').addClass('card-title').text(date.toLocaleDateString());
         var temperature = $('<p>').addClass('card-text current-temp').text('Temperature: ' + temp + " °F");
         var humidity1 = $('<p>').addClass('card-text current-humidity').text('Humidity: ' + humidity + '%');
         var wind1 = $('<p>').addClass('card-text current-wind').text('wind Speed: ' + wind + ' MPH ')
@@ -108,7 +107,7 @@ $('#document').ready(function () {
 })
 
 function finalWeather() {
-    var date = new Date();
+    // var date = new Date();
     $('#searchBtn').on('click', function (e) {
         e.preventDefault();
         var city = $('#myCity').val();
@@ -127,12 +126,10 @@ function makelist(name) {
     $(".list").prepend(li);
 }
 
-// var list = JSON.parse(window.localStorage.getItem('city') || []);
 var list = JSON.parse(window.localStorage.getItem("city")) || [];
 // console.log(list)
 for (var i = 0; i < list.length; i++) {
     if (i === 0) {
-        // console.log("doing the thing on list 0")
         getweather(list[i]);
     }
 }
@@ -142,7 +139,8 @@ $('#clear').on('click', function () {
         var clear = confirm('press ok if you want to clear list!');
         if (clear) {
             $('list').empty();
-            localStorage.setItem('city', []);
+            localStorage.clear();
+            // localStorage.setItem("city", []);
         }
     }
 });
