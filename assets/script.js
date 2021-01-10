@@ -31,7 +31,7 @@ function getweather(city) {
         var cardBody = $('<div>').addClass('card-body');
         var city = $('<h2>').addClass('card-title').text(nation);
         // var cityDate = $('<h4>').addClass('card-title').text(date.toLocaleDateString());
-        var cityDate = $('<h4>').addClass('card-title').text(new Date((date)));
+        var cityDate = $('<h4>').addClass('card-title').text(new Date(date));
 
         var temperature = $('<p>').addClass('card-text current-temp').text('Temperature: ' + temp + " °F");
         var humidity1 = $('<p>').addClass('card-text current-humidity').text('Humidity: ' + humidity + '%');
@@ -87,7 +87,6 @@ function getweather(city) {
             url: queryURL,
             method: "GET",
         }).then(function (data) {
-            //console.log(data.value);
             //create pagragragh for the uv index text and span tag for the data value number and append it to today's dayly only
             var uvText = $("<p>").text("UV Index: ");
             var mySpan = $("<span>").addClass("btn btn-sm").text(data.value);
@@ -129,7 +128,7 @@ function makelist(name) {
 }
 
 // var list = JSON.parse(window.localStorage.getItem('city') || []);
-var list = JSON.parse(window.localStorage.getItem('city')) || [];
+var list = JSON.parse(window.localStorage.getItem("city")) || [];
 // console.log(list)
 for (var i = 0; i < list.length; i++) {
     if (i === 0) {
