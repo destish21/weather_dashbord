@@ -24,10 +24,10 @@ function getweather(city) {
         var lon = (response.coord.lon)
         var icon = (response.weather[0].icon);
         makelist(nation);
+        setlocalStorage(nation)
         $('#currentCity').empty();
         console.log(nation)
         var date = new Date();
-
         var card = $('<div>').addClass('card');
         var cardBody = $('<div>').addClass('card-body');
         var city = $('<h2>').addClass('card-title').text(nation);
@@ -77,9 +77,6 @@ function getweather(city) {
         }
     });
 
-    list.push(city);
-    window.localStorage.setItem('city', JSON.stringify(list));
-
     function UVIndex(lat, lon) {
         var queryURL = UviqueryURL + apiKey + "&lat=" + lat + "&lon=" + lon;
         $.ajax({
@@ -107,12 +104,12 @@ $('#document').ready(function () {
 })
 
 function finalWeather() {
-    // var date = new Date();
     $('#searchBtn').on('click', function (e) {
         e.preventDefault();
         var city = $('#myCity').val();
         $('#myCity').val('');
         // console.log(city)
+        // setlocalStorage(city)
         getweather(city);
     });
 
@@ -126,12 +123,19 @@ function makelist(name) {
     $(".list").prepend(li);
 }
 
+function setlocalStorage(city) {
+    list.push(city);
+    window.localStorage.setItem('city', JSON.stringify(list));
+}
+
 var list = JSON.parse(window.localStorage.getItem("city")) || [];
-// console.log(list)
-for (var i = 0; i < list.length; i++) {
+//filter the list of duplicates
+var filtList = Array.from(new Set(list))//medium.com/
+for (var i = 0; i < filtList.length; i++) {
     if (i === 0) {
-        getweather(list[i]);
+        getweather(filtList[i]);
     }
+    makelist(filtList[i])
 }
 
 $('#clear').on('click', function () {
@@ -140,7 +144,6 @@ $('#clear').on('click', function () {
         if (clear) {
             $('list').empty();
             localStorage.clear();
-            // localStorage.setItem("city", []);
         }
     }
 });
