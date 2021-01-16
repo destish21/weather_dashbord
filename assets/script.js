@@ -106,7 +106,6 @@ function finalWeather() {
         e.preventDefault();
         var city = $('#myCity').val();
         $('#myCity').val('');
-        // console.log(city)
         getweather(city);
     });
 
@@ -115,7 +114,6 @@ function finalWeather() {
     });
 }
 function makelist(name) {
-    // console.log(++makeListCOUNTS)
     var li = $("<li>").addClass("list-group-item  list-group-item-action").text(name);
     li.attr('id', name);
     $(".list").prepend(li);
@@ -124,9 +122,9 @@ function makelist(name) {
 function setlocalStorage(city) {
     list.push(city);
     var filtList = Array.from(new Set(list))//medium.com/
-    //get rid of duplicates HERE
     window.localStorage.setItem('city', JSON.stringify(filtList));
 }
+
 var list = JSON.parse(window.localStorage.getItem("city")) || [];
 //filter the list of duplicates
 var filtList = Array.from(new Set(list))//medium.com/
