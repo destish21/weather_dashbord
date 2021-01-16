@@ -26,7 +26,6 @@ function getweather(city) {
         makelist(nation);
         setlocalStorage(nation)
         $('#currentCity').empty();
-        // console.log(nation)
         var date = new Date();
         var card = $('<div>').addClass('card');
         var cardBody = $('<div>').addClass('card-body');
@@ -53,7 +52,6 @@ function getweather(city) {
     }).then(function (data) {
         console.log(data)
         var results = data.list;
-        // console.log(results[0])
         console.log(new Date(data.list[0].dt_txt).toLocaleDateString())
         console.log(data.list[0].weather[0].icon)
         $("#forecast").html("<h3 id=\"forcastHeader\" class=\"mt-3\">5-Days Weather Forecasting:</h4>").append("<div class=\"row\">");
