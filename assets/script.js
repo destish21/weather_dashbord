@@ -26,7 +26,7 @@ function getweather(city) {
         makelist(nation);
         setlocalStorage(nation)
         $('#currentCity').empty();
-        console.log(nation)
+        // console.log(nation)
         var date = new Date();
         var card = $('<div>').addClass('card');
         var cardBody = $('<div>').addClass('card-body');
@@ -109,7 +109,6 @@ function finalWeather() {
         var city = $('#myCity').val();
         $('#myCity').val('');
         // console.log(city)
-        // setlocalStorage(city)
         getweather(city);
     });
 
@@ -118,6 +117,7 @@ function finalWeather() {
     });
 }
 function makelist(name) {
+    // console.log(++makeListCOUNTS)
     var li = $("<li>").addClass("list-group-item  list-group-item-action").text(name);
     li.attr('id', name);
     $(".list").prepend(li);
@@ -125,17 +125,19 @@ function makelist(name) {
 
 function setlocalStorage(city) {
     list.push(city);
-    window.localStorage.setItem('city', JSON.stringify(list));
+    var filtList = Array.from(new Set(list))//medium.com/
+    //get rid of duplicates HERE
+    window.localStorage.setItem('city', JSON.stringify(filtList));
 }
-
 var list = JSON.parse(window.localStorage.getItem("city")) || [];
 //filter the list of duplicates
 var filtList = Array.from(new Set(list))//medium.com/
 for (var i = 0; i < filtList.length; i++) {
     if (i === 0) {
         getweather(filtList[i]);
+    } else {
+        makelist(filtList[i])
     }
-    makelist(filtList[i])
 }
 
 $('#clear').on('click', function () {
