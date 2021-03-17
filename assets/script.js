@@ -97,9 +97,9 @@ function getweather(city) {
     }
 }
 
-$('#document').ready(function () {
-    finalWeather()
-})
+// $('#document').ready(function () {
+//     finalWeather()
+// })
 
 function finalWeather() {
     $('#searchBtn').on('click', function (e) {
