@@ -23,8 +23,13 @@ function getweather(city) {
         var lat = (response.coord.lat);
         var lon = (response.coord.lon)
         var icon = (response.weather[0].icon);
-        makelist(nation);
-        setlocalStorage(nation)
+        let itsADuplicate = list.includes(nation);
+
+        if(!itsADuplicate){
+            makelist(nation);
+            setlocalStorage(nation)
+        }
+        
         $('#currentCity').empty();
         var date = new Date();
         var card = $('<div>').addClass('card');
@@ -97,9 +102,9 @@ function getweather(city) {
     }
 }
 
-// $('#document').ready(function () {
-//     finalWeather()
-// })
+$('#document').ready(function () {
+    finalWeather()
+})
 
 function finalWeather() {
     $('#searchBtn').on('click', function (e) {
